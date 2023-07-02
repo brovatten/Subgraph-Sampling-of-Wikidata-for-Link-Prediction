@@ -33,14 +33,20 @@ The expectation is that during the training process, the Louvre node would have 
 
 ## Challenges with Subgraph Sampling for Link Prediction
 
-The main challenges with subgraph sampling is *Data leakage*. There are two types of data leakage. 
+The main challenges with subgraph sampling is *Data leakage* and large-scale dataset. 
 
-- Direct data-leakage. When you want to predict for a pair $(h,t)$ but the subgraphs sampled for nodes $N_h = \{n | (n, r, h) \in G \text{ or } (h, r, n) \in G\}$
+### Data leakage
 
+ There are two types of data leakage while predicting for $h,t$ on a graph $G$. 
 
+- Direct data-leakage. When either of the sampled subgraphs $S_h, S_t \subseteq G$ contain the other node $h \in S_t$ or  $h \in S_h$. This means the signals could be directly propagated from the other node, causing the model only to focus on that node and not learn. 
 
-- Indirect data-leakage
+- Indirect data-leakage. If there is a path between $h,t$ between the combined subgraph $S_{combined} = S_h \cup S_t$. 
+
+While this may lead to optimistic results, which may not be cause for concerns at first glance, the model will have impaired generalization. To measure how well it generalizes, *Inductive Link Prediction* is often used. Inductive Link Prediction introduces a previously unseen set of nodes $C$ and performs prediction on $h,t$ where $h \in G$, $t \in C$.  Contrary to the previous method called *Transductive Link Prediction* where all nodes are seen. 
+
+### Large-scale dataset
+
+What the Data Leakage infers is that 
 
 [0] https://arxiv.org/pdf/1902.10197.pdf
-
-
