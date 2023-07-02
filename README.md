@@ -1,4 +1,4 @@
-# Subgraph-Sampling-of-Wikidata-for-Link-Prediction
+# Subgraph Sampling of Wikidata for Link Prediction
 
 This is a guide to subraph sampling in a large interconnected knowledge graph for link prediction. 
 
